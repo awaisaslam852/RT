@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "88486042543",
+    "firebase_url": "https://rt-news-a8242.firebaseio.com",
+    "project_id": "rt-news-a8242",
+    "storage_bucket": "rt-news-a8242.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:88486042543:android:9a3a3bea527cc24aacad5a",
+        "android_client_info": {
+          "package_name": "com.example.rt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "88486042543-g0f5tf8qhh7g19gcphbk4d2vafumhuih.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUKeE0JIZtgbf30MshCF8PoqHVGmMUlfg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "88486042543-g0f5tf8qhh7g19gcphbk4d2vafumhuih.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

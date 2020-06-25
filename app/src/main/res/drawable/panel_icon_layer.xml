@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:drawable="@drawable/cloudy_login_panel"
+        android:width="442dp"
+        android:height="162dp"
+        />
+
+</layer-list>
