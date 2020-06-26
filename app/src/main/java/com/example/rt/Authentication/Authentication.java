@@ -40,9 +40,9 @@ public class Authentication extends AppCompatActivity {
         Fragment ForgotPassword_Fragment = fragmentManager
                 .findFragmentByTag(Utils.ForgetPassword);
 
-//        if (SignUp_Fragment != null)
-//            replaceLoginFragment();
-//        else
+        if (SignUp_Fragment != null)
+            replaceLoginFragment();
+        else
         if (ForgotPassword_Fragment != null)
             replaceLoginFragment();
         else

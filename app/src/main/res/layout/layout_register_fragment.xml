@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Authentication.RegisterFragment"
-    android:id="@+id/relative_bg_register"
     >
 
 
@@ -38,6 +37,7 @@
             android:src="@drawable/back_btn_black"
             android:padding="15dp"
             android:layout_centerVertical="true"
+            android:id="@+id/back_btn_register_frag"
             />
 
         <TextView
@@ -96,6 +96,7 @@
             android:drawableLeft="@drawable/person_icon_layer"
             android:gravity="center_vertical"
             android:drawablePadding="10dp"
+            android:inputType="textAutoCorrect"
             android:id="@+id/et1_name_register_frag"
             />
 
@@ -114,6 +115,7 @@
             android:layout_marginTop="10dp"
             android:drawableLeft="@drawable/email_icon_layer"
             android:gravity="center_vertical"
+            android:inputType="textEmailAddress"
             android:drawablePadding="10dp"
             android:id="@+id/et2_email_register_frag"
             />
@@ -134,6 +136,7 @@
             android:drawableLeft="@drawable/password_icon_layer"
             android:drawablePadding="10dp"
             android:gravity="center_vertical"
+            android:inputType="textVisiblePassword"
             android:id="@+id/et3_pass_register_frag"
             />
 
@@ -153,6 +156,7 @@
             android:drawableLeft="@drawable/password_icon_layer"
             android:drawablePadding="10dp"
             android:gravity="center_vertical"
+            android:inputType="textVisiblePassword"
             android:id="@+id/et4_cnfrm_pass_register_frag"
             />
 
@@ -173,12 +177,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@drawable/custom_checkbox"
+                android:checked="true"
+                android:id="@+id/checkbox_id_register_frag"
 
                 />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="I aagree to "
+            android:text="I agree to "
             android:textColor="#515151"
             android:layout_marginLeft="10dp"
             />
@@ -187,18 +193,21 @@
                 android:layout_height="wrap_content"
                 android:text="Terms"
                 android:textColor="@color/colorPrimary"
+                android:id="@+id/tv_terms_register_frag"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" and "
                 android:textColor="#515151"
+
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Privacy Policy"
                 android:textColor="@color/colorPrimary"
+                android:id="@+id/tv_policy_register_frag"
                 />
 
         </LinearLayout>
@@ -231,6 +240,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="5dp"
                 android:text="Already have an account?"
                 />
 
@@ -238,10 +248,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" Login"
+                android:padding="5dp"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
-                android:layout_marginLeft="5dp"
-                android:id="@+id/register_btn_login_fragment"
+                android:id="@+id/login_btn_register_frag"
                 />
         </LinearLayout>
 

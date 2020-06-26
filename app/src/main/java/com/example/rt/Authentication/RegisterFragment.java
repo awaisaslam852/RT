@@ -11,9 +11,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,14 +27,13 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.rt.HelperClasses.Utils;
 import com.example.rt.MainActivity;
+import com.example.rt.ModelClasses.StaffData;
 import com.example.rt.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
@@ -51,18 +50,14 @@ import static android.content.ContentValues.TAG;
 public class RegisterFragment extends Fragment {
     private static FragmentManager fragmentManager;
 
-    private EditText userNameEt, emailEt, passEt ;
-    private AutoCompleteTextView autoCompleteTextView ;
-    private LinearLayout loginIntentBtn, mainLinarLayoyut ;
-    private RelativeLayout relativeLayout ;
-    private TextView noneTv ;
+    private EditText et1_fullname, et2_email, et3_pass, et4_cnfrmpass ;
+    private TextView tv_terms, tv_policy, loginIntentBtn ;
     private Button registerBtn ;
-    private String userType = null, cityString ;
     private ImageView backBtn ;
-    private List<String> listUsername ;
+    private CheckBox checkBox ;
     /*......*/
     private FirebaseAuth auth ;
-    private DatabaseReference refRegister, refUsername ;
+    private DatabaseReference refRegister;
     private ValueEventListener listener ;
 
     @Override
@@ -71,32 +66,32 @@ public class RegisterFragment extends Fragment {
         fragmentManager = getActivity().getSupportFragmentManager();
         auth = FirebaseAuth.getInstance();
 
-//        initilize(rootView);
-//        @SuppressLint("ResourceType") XmlResourceParser xrp = getResources().getXml(R.drawable.text_selector_login);
-//        try {
-//            ColorStateList csl = ColorStateList.createFromXml(getResources(), xrp);
-//            noneTv.setTextColor(csl);
-//        } catch (Exception e) {
-//        }
+        initilize(rootView);
+        @SuppressLint("ResourceType") XmlResourceParser xrp = getResources().getXml(R.drawable.text_selector_login);
+        try {
+            ColorStateList csl = ColorStateList.createFromXml(getResources(), xrp);
+            loginIntentBtn.setTextColor(csl);
+            tv_terms.setTextColor(csl);
+            tv_policy.setTextColor(csl);
+        } catch (Exception e) {
+        }
         /*..................*/
         return rootView ;
     }
 
     public void initilize(View view){
 
-        userNameEt  = view.findViewById(R.id.et1_name_register_frag);
-        emailEt     = view.findViewById(R.id.et2_email_register_frag);
-        passEt      = view.findViewById(R.id.et3_pass_register_frag);
-        noneTv      = view.findViewById(R.id.et4_cnfrm_pass_register_frag);
-//        loginIntentBtn = view.findViewById(R.id.login_btn_intent_register);
-        relativeLayout = view.findViewById(R.id.relative_bg_register);
-//        backBtn     = view.findViewById(R.id.back_btn_register_fragment);
+        et1_fullname  = view.findViewById(R.id.et1_name_register_frag);
+        et2_email     = view.findViewById(R.id.et2_email_register_frag);
+        et3_pass      = view.findViewById(R.id.et3_pass_register_frag);
+        et4_cnfrmpass = view.findViewById(R.id.et4_cnfrm_pass_register_frag);
+
+        tv_terms = view.findViewById(R.id.tv_terms_register_frag);
+        tv_policy     = view.findViewById(R.id.tv_policy_register_frag);
+        loginIntentBtn = view.findViewById(R.id.login_btn_register_frag);
         registerBtn      = view.findViewById(R.id.signup_btn_register_frag);
-//        mainLinarLayoyut = view.findViewById(R.id.linear_main_register_fragment);
-        mainLinarLayoyut.requestFocus();
-
-
-        listUsername = new ArrayList<>();
+        backBtn = view.findViewById(R.id.back_btn_register_frag);
+        checkBox = view.findViewById(R.id.checkbox_id_register_frag);
 
         if (getActivity()!=null) {
 //            ArrayAdapter<String> adapterio = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, mlist);
@@ -126,13 +121,17 @@ public class RegisterFragment extends Fragment {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 registerMethod();
             }
         });
 
 
     }
+
+
+
+
+
     /*....OnStart Method.....*/
 
     @Override
@@ -146,32 +145,27 @@ public class RegisterFragment extends Fragment {
     /*...........Register Method Student.........*/
     private void registerMethod() {
 
-        final String username   = userNameEt.getText().toString().toLowerCase().trim();
-        final String  email     = emailEt.getText().toString().trim();
-        final String  city      = autoCompleteTextView.getText().toString().trim();
-        final String  password  = passEt.getText().toString().trim();
+        final String fullname       = et1_fullname.getText().toString().toLowerCase().trim();
+        final String  email         = et2_email.getText().toString().trim();
+        final String  password      = et3_pass.getText().toString().trim();
+        final String  cnfrmPassword = et4_cnfrmpass.getText().toString().trim();
         //Email Validation pattern
         String emailPattern = "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}\\b";
 
-        if (TextUtils.isEmpty(username) || username.length()<6) {
-            userNameEt.setError("Invalid username");
-        } else if (listUsername.contains(username)) {
-            userNameEt.setError("Username already exist");
-            Toast.makeText(getContext(), "Username already exist.", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(fullname) || fullname.length()<6) {
+            et1_fullname.setError("Invalid username");
         } else if (TextUtils.isEmpty(email)) {
-            emailEt.setError("Email Address");
+            et2_email.setError("Email Address");
         }else if (!email.matches(emailPattern)) {
-            emailEt.setError("Email is not valid");
+            et2_email.setError("Email is not valid");
         } else if (TextUtils.isEmpty(password) || password.length()<6) {
-            passEt.setError("Invalid Password");
-        } else if (TextUtils.isEmpty(city)) {
-            autoCompleteTextView.setError("Select City");
-        }
-        else if (userType==null) {
-            Toast.makeText(getContext(), "Please Select UserType.", Toast.LENGTH_SHORT).show();
+            et3_pass.setError("Invalid Password");
+        } else if (!cnfrmPassword.equals(password)) {
+            et4_cnfrmpass.setError("Password not matched");
+        } else if (!checkBox.isChecked()) {
+            Toast.makeText(getContext(), "Please click on checkbox to accept Terms & Conditions.", Toast.LENGTH_SHORT).show();
         }
         else {
-
             /*....*/
             // data is found
             final Dialog getDialog = new ProgressDialog(getContext());
@@ -183,7 +177,7 @@ public class RegisterFragment extends Fragment {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 Log.d(TAG, "createUserWithEmail:success");
-                                createDatabase(username, email, city);
+                                createDatabase(fullname, email);
 //                                sendEmailVerification(username, email);
                                 getDialog.dismiss();
                             } else {
@@ -201,7 +195,7 @@ public class RegisterFragment extends Fragment {
 
     }
     //    ==============================================================================================
-    private void sendEmailVerification(final String username, final String email, final String city) {
+    private void sendEmailVerification(final String username, final String email) {
         final FirebaseUser user = auth.getCurrentUser();
         if (user != null) {
             user.sendEmailVerification()
@@ -209,7 +203,7 @@ public class RegisterFragment extends Fragment {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                createDatabase(username, email, city);
+                                createDatabase(username, email);
                                 Toast.makeText(getContext(), "Verification email sent to " + user.getEmail(), Toast.LENGTH_SHORT).show();
                             }
                             else {
@@ -223,10 +217,10 @@ public class RegisterFragment extends Fragment {
     }
     ////////////////////////////////////////////////////////////////////////
 //    ---------- Create database ----------
-    private void createDatabase(String username, String email, String city) {
+    private void createDatabase(String fullname, String email) {
 
         FirebaseUser firebaseUser = auth.getCurrentUser();
-        String userid = firebaseUser.getUid();
+        String userUid = firebaseUser.getUid();
 
         Long currentTime = System.currentTimeMillis(); //getting current time in millis
         Calendar cal = Calendar.getInstance();
@@ -238,47 +232,39 @@ public class RegisterFragment extends Fragment {
         String dateStr = sdf.format(timestamp);
         String dateStamp = showTime + dateStr;
 
-        if (userType!=null){
-            if (userType.equals("Student")){
-                /*............. Database Student ..............**/
-                refRegister = FirebaseDatabase.getInstance().getReference("Student_Accounts").child(userid).child("Profile_Info");
-                final DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference("All_Users_List").child(userid);
-//                final UsersData data = new UsersData(
-//                        userid,
-//                        dateStamp,
-//                        username,
-//                        "",
-//                        email,
-//                        "",
-//                        city,
-//                        "",
-//                        "",
-//                        username.toLowerCase(),
-//                        "Student",
-//                        "no",
-//                        "",
-//                        0,
-//                        0,
-//
-//                        "",
-//                        ""
-//                );
-                HashMap data = new HashMap();
+                /*............. Database Staff ..............**/
+                refRegister = FirebaseDatabase.getInstance().getReference("Staff_Accounts").child(userUid).child("Profile_Info");
+                final DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference("All_Users_List").child(userUid);
+                final StaffData data = new StaffData(
+                        userUid,
+                        dateStamp,
+                        ""+fullname,
+                        ""+email,
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""+fullname.toLowerCase(),
+                        "staff",
+                        "no",
+                        "",
+                        "",
+                        ""
+                );
                 refRegister.setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            refUsername.removeEventListener(listener);
-                            auth.signOut();
-                            emailEt.setText("");
-                            passEt.setText("");
-                            userNameEt.setText("");
-                            autoCompleteTextView.setText("");
+                            ref2.setValue(data);
+                            et1_fullname.setText("");
+                            et2_email.setText("");
+                            et3_pass.setText("");
+                            et4_cnfrmpass.setText("");
                             Toast.makeText(getContext(), "Succeed ! Account created", Toast.LENGTH_SHORT).show();
                             Intent intent=new Intent( getActivity(), MainActivity.class );
                             startActivity(intent);
                             getActivity().finish();
-                            System.out.println("Database of Student created 0000000000000000000000000000000000");
+                            System.out.println("Database of Staff created -=0000000000000000000000000000000000");
                         } else {
                             Toast.makeText(getContext(), task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
 
@@ -286,9 +272,6 @@ public class RegisterFragment extends Fragment {
                     }
                 });
                 /*............................................*/
-            }
-
-        }
 
     }
 

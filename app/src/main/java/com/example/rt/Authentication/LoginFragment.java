@@ -24,6 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.rt.Dashboard.Dashboard;
 import com.example.rt.HelperClasses.Utils;
 import com.example.rt.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -105,6 +106,9 @@ public class LoginFragment extends Fragment {
 
     /*......Login Method Main......*/
     public void signinMethod() {
+
+        final String userUid = auth.getCurrentUser().getUid();
+
         String email = emailEt.getText().toString();
         String password = passEt.getText().toString();
         //Email Validation pattern
@@ -127,7 +131,8 @@ public class LoginFragment extends Fragment {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-//
+                                loginMethod(userUid);
+                                dialog.dismiss();
 
                             }
                             else {
@@ -145,7 +150,7 @@ public class LoginFragment extends Fragment {
 
     /*...Login Student...*/
     private void loginMethod(String userUid){
-        DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference("Student_Accounts").child(userUid).child("Profile_Info");
+        DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference("Staff_Accounts").child(userUid).child("Profile_Info");
         final DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference("All_Users_List").child(userUid);
         HashMap map = new HashMap();
         map.put("isVerified", "Yes");
@@ -153,14 +158,14 @@ public class LoginFragment extends Fragment {
         ref2.updateChildren(map);
         ////////////////////////////////////////////////////
         int aa = 1111;
-//        Intent intent = new Intent(getActivity(), Dashboard.class);
-//        intent.putExtra("on", aa);
+        Intent intent = new Intent(getActivity(), Dashboard.class);
+        intent.putExtra("on", aa);
 //        refLogin.removeEventListener(listener);
-//        intent.putExtra("userType", "Student");
-//        intent.putExtra("showRipple", "true");
-//        intent.putExtra("userid", userUid);
-//        startActivity(intent);
-//        getActivity().finish();
+        intent.putExtra("userType", "Student");
+        intent.putExtra("showRipple", "true");
+        intent.putExtra("userid", userUid);
+        startActivity(intent);
+        getActivity().finish();
     }
 
 
@@ -169,7 +174,7 @@ public class LoginFragment extends Fragment {
     public void onStop() {
         super.onStop();
         if (auth.getCurrentUser()!=null) {
-            refLogin.removeEventListener(listener);
+//            refLogin.removeEventListener(listener);
         }
     }
 
@@ -177,7 +182,7 @@ public class LoginFragment extends Fragment {
     public void onPause() {
         super.onPause();
         if (auth.getCurrentUser()!=null) {
-            refLogin.removeEventListener(listener);
+//            refLogin.removeEventListener(listener);
         }
     }
 
