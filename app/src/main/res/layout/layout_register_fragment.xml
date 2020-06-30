@@ -23,7 +23,8 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/panel_icon_layer_register"
+            android:src="@drawable/cloudy_panel_register"
+            android:scaleType="fitXY"
             />
 
         <RelativeLayout
@@ -67,18 +68,17 @@
             android:text="Register"
             android:textColor="#222"
             android:textStyle="bold"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="25dp"
-            android:layout_marginBottom="3dp"
             />
         <View
             android:layout_width="35dp"
             android:layout_height="2dp"
             android:background="@color/colorPrimary"
             android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="15sp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="10dp"
             />
 
         <!--.....Full Name EditText......-->
@@ -88,7 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Full Name"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:background="@drawable/et_bg_login"
             android:padding="10dp"
             android:layout_marginLeft="25dp"
@@ -107,7 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:background="@drawable/et_bg_login"
             android:padding="10dp"
             android:layout_marginLeft="25dp"
@@ -127,7 +127,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:background="@drawable/et_bg_login"
             android:padding="10dp"
             android:layout_marginLeft="25dp"
@@ -147,7 +147,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:hint="Confirm Password"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:background="@drawable/et_bg_login"
             android:padding="10dp"
             android:layout_marginLeft="25dp"
@@ -217,7 +217,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15sp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:layout_alignParentBottom="true"
@@ -234,7 +234,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="20dp"
+            android:layout_margin="10dp"
             android:orientation="horizontal"
             >
             <TextView
@@ -247,7 +247,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Login"
+                android:text="Login"
                 android:padding="5dp"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary"

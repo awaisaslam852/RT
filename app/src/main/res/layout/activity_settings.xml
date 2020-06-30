@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Dashboard.Settings">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:src="@drawable/login_bg_cover"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/cloudy_panel_register"
+            android:scaleType="fitXY"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/back_btn_black"
+                android:layout_marginLeft="15dp"
+                android:layout_centerVertical="true"
+                android:id="@+id/back_btn_settings"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Settings"
+                android:textColor="#000"
+                android:textSize="18sp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/tv_title_dashboard"
+                />
+        </RelativeLayout>
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="70dp"
+        android:background="@drawable/bg_top_register"
+        android:padding="15dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Profile"
+            android:textColor="#000"
+            android:fontFamily="@font/poppins_medium"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Change Password"
+            android:textColor="#000"
+            android:fontFamily="@font/poppins_medium"
+            android:padding="10dp"
+            android:layout_marginTop="8dp"
+            android:drawableRight="@drawable/right_arrow_icon"
+            android:background="#fff"
+            android:id="@+id/btn1_change_pass_settings"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Terms of Service"
+            android:textColor="#000"
+            android:fontFamily="@font/poppins_medium"
+            android:padding="10dp"
+            android:layout_marginTop="8dp"
+            android:background="#fff"
+            android:id="@+id/btn2_terms_settings"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Privacy Policy"
+            android:textColor="#000"
+            android:fontFamily="@font/poppins_medium"
+            android:padding="10dp"
+            android:layout_marginTop="8dp"
+            android:background="#fff"
+            android:id="@+id/btn3_policy_settings"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Other Apps"
+            android:textColor="#000"
+            android:fontFamily="@font/poppins_medium"
+            android:padding="10dp"
+            android:layout_marginTop="8dp"
+            android:background="#fff"
+            android:id="@+id/btn4_other_settings"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Auctions Apps"
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:fontFamily="@font/poppins_medium"
+            android:padding="10dp"
+            android:layout_marginTop="8dp"
+            android:background="#fff"
+            android:id="@+id/btn5_auction_settings"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:fontFamily="@font/poppins_medium"
+            android:padding="10dp"
+            android:layout_marginTop="8dp"
+            android:background="#fff"
+            android:id="@+id/btn6_logout_settings"
+            />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

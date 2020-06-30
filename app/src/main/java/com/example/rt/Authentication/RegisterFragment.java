@@ -25,6 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.rt.Dashboard.Dashboard;
 import com.example.rt.HelperClasses.Utils;
 import com.example.rt.MainActivity;
 import com.example.rt.ModelClasses.StaffData;
@@ -235,6 +236,7 @@ public class RegisterFragment extends Fragment {
                 /*............. Database Staff ..............**/
                 refRegister = FirebaseDatabase.getInstance().getReference("Staff_Accounts").child(userUid).child("Profile_Info");
                 final DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference("All_Users_List").child(userUid);
+        final DatabaseReference ref3 = FirebaseDatabase.getInstance().getReference("journalist_details").child(userUid);
                 final StaffData data = new StaffData(
                         userUid,
                         dateStamp,
@@ -256,12 +258,13 @@ public class RegisterFragment extends Fragment {
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             ref2.setValue(data);
+                            ref3.setValue(data);
                             et1_fullname.setText("");
                             et2_email.setText("");
                             et3_pass.setText("");
                             et4_cnfrmpass.setText("");
                             Toast.makeText(getContext(), "Succeed ! Account created", Toast.LENGTH_SHORT).show();
-                            Intent intent=new Intent( getActivity(), MainActivity.class );
+                            Intent intent=new Intent( getActivity(), Dashboard.class );
                             startActivity(intent);
                             getActivity().finish();
                             System.out.println("Database of Staff created -=0000000000000000000000000000000000");

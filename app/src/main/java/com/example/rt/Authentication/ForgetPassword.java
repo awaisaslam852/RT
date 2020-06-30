@@ -1,5 +1,6 @@
 package com.example.rt.Authentication;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +19,17 @@ import androidx.fragment.app.FragmentManager;
 import com.example.rt.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 public class ForgetPassword extends Fragment {
 
     private EditText emailEt ;
     private TextView tv_hint ;
-    ///
+    //////
     private FirebaseAuth auth ;
 
     @Override
@@ -35,6 +41,7 @@ public class ForgetPassword extends Fragment {
         initilize(rootView);
 
         /*..............................*/
+
         return rootView ;
 }
 

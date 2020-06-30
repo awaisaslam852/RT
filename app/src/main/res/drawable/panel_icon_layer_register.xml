@@ -4,7 +4,7 @@
     <item
         android:drawable="@drawable/cloudy_panel_register"
         android:width="512dp"
-        android:height="182dp"
+        android:height="288dp"
 
         />
 

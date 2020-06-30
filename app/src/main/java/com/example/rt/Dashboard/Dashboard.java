@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,8 +20,8 @@ import com.google.firebase.auth.FirebaseAuth;
 public class Dashboard extends AppCompatActivity {
 
     BottomNavigationView navigation ;
-    private TextView tv_heading ;
-
+//    private TextView tv_heading ;
+    //////
     private FirebaseAuth auth ;
 
     @Override
@@ -30,7 +32,7 @@ public class Dashboard extends AppCompatActivity {
 
 
         navigation = findViewById(R.id.bottom_navigation_id);
-        tv_heading = findViewById(R.id.tv_title_dashboard);
+//        tv_heading = findViewById(R.id.tv_title_dashboard);
 
         loadFragment(new Feed());
 
@@ -42,17 +44,17 @@ public class Dashboard extends AppCompatActivity {
                 switch (menuItem.getItemId()){
                     case R.id.f1:
                         fragment = new Feed();
-                        tv_heading.setText("Feed");
+//                        tv_heading.setText("Feed");
                         loadFragment(fragment);
                         break;
                     case R.id.f2:
                         fragment = new Post();
-                        tv_heading.setText("Post");
+//                        tv_heading.setText("Post");
                         loadFragment(fragment);
                         break;
                     case R.id.f3:
                         fragment = new Profile();
-                        tv_heading.setText("Profile");
+//                        tv_heading.setText("Profile");
                         loadFragment(fragment);
                         break;
                 }

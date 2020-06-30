@@ -46,6 +46,7 @@ public class LoginFragment extends Fragment {
     private FirebaseAuth auth ;
     private DatabaseReference refLogin ;
     private ValueEventListener listener ;
+    private String userUid ;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -107,7 +108,9 @@ public class LoginFragment extends Fragment {
     /*......Login Method Main......*/
     public void signinMethod() {
 
-        final String userUid = auth.getCurrentUser().getUid();
+        if (auth.getCurrentUser()!=null) {
+            userUid = auth.getCurrentUser().getUid();
+        }
 
         String email = emailEt.getText().toString();
         String password = passEt.getText().toString();
@@ -125,6 +128,7 @@ public class LoginFragment extends Fragment {
             // data is found
             final ProgressDialog dialog = new ProgressDialog(getContext());
             ((ProgressDialog) dialog).setMessage("Please Wait...");
+            dialog.setCancelable(false);
             dialog.show();
             auth.signInWithEmailAndPassword(email , password)
                     .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
@@ -150,12 +154,14 @@ public class LoginFragment extends Fragment {
 
     /*...Login Student...*/
     private void loginMethod(String userUid){
-        DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference("Staff_Accounts").child(userUid).child("Profile_Info");
-        final DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference("All_Users_List").child(userUid);
-        HashMap map = new HashMap();
-        map.put("isVerified", "Yes");
-        ref1.updateChildren(map);
-        ref2.updateChildren(map);
+        if (userUid!=null) {
+            DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference("Staff_Accounts").child(userUid).child("Profile_Info");
+            final DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference("All_Users_List").child(userUid);
+            HashMap map = new HashMap();
+            map.put("isVerified", "Yes");
+            ref1.updateChildren(map);
+            ref2.updateChildren(map);
+        }
         ////////////////////////////////////////////////////
         int aa = 1111;
         Intent intent = new Intent(getActivity(), Dashboard.class);
@@ -187,6 +193,17 @@ public class LoginFragment extends Fragment {
     }
 
     /*.................................*/
+//    Long firstClick = 1L;
+//    Long secondClick = 0L;
+//    public void onBackPressed() {
+//        secondClick = System.currentTimeMillis();
+//        if ((secondClick - firstClick) / 1000 < 2) {
+//            getActivity().onBackPressed();
+//        } else {
+//            firstClick = System.currentTimeMillis();
+//            Toast.makeText(getContext(), "Touch again to exit", Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
 }
 

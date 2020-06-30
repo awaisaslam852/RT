@@ -26,7 +26,6 @@ public class Feed extends Fragment {
 
     private EditText emailEt ;
     private TextView tv_hint ;
-    private SliderView sliderView ;
     ///
     private FirebaseAuth auth ;
 
@@ -46,24 +45,7 @@ public class Feed extends Fragment {
 
     public void initilize(View view){
 
-        sliderView = view.findViewById(R.id.imageSlider);
 
-
-        SliderAdapterExample sliderAdapterExample = new SliderAdapterExample(getContext());
-
-        sliderView.setSliderAdapter(sliderAdapterExample);
-        sliderView.setIndicatorEnabled(true);
-        sliderView.startAutoCycle();
-        sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM);
-        sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
-
-        SliderItem item = new SliderItem();
-
-        item.setDescription("Slider Item Added Manually");
-
-        item.setImageUrl("https://previews.123rf.com/images/tul/tul1705/tul170500028/78538164-news-vector-trendy-banner-design-concept-modern-style-with-thin-line-art-news-icons-on-trendy-colors.jpg");
-//        item.setImageUrl("");
-        sliderAdapterExample.addItem(item);
 
 
     }
